@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
 
-type Props = {};
-
-export const SearchAndFilter = ({}: Props) => {
+export const SearchAndFilter = () => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="w-full border border-b-slate-500 p-4">
+    <div className="w-full border-b p-4">
       <Input
         placeholder="Search for a product..."
         value={search}

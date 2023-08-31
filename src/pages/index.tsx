@@ -1,7 +1,6 @@
 import Head from "next/head";
 
 import { api } from "@/utils/api";
-import { Button } from "../components/ui/button";
 import { SearchAndFilter } from "../components/SearchAndFilter";
 import { HowToPay } from "../components/HowToPay";
 import { Products } from "../components/Products";
@@ -64,8 +63,8 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen bg-slate-400">
-        <main className="flex min-h-screen max-w-2xl flex-col items-center justify-start border-blue-50 bg-white">
+      <div className="w-screen">
+        <main className="flex min-h-screen max-w-2xl flex-col items-center justify-start border-r ">
           <SearchAndFilter />
           <HowToPay totalAmount={99} />
           <Products products={products} />
