@@ -17,6 +17,9 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ["bilder.kolonial.no"],
+  },
 };
 
 export default config;
