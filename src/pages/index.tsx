@@ -15,8 +15,9 @@ export type Product = {
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const productCount = api.products.getDocumentCount.useQuery();
 
-  console.log(hello.data);
+  console.log(hello.data, productCount.data);
 
   const products: Product[] = [
     {

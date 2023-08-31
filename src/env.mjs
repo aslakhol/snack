@@ -9,6 +9,8 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(["development", "test", "production"]),
+    SANITY_PROJECT_ID: z.string().min(1),
+    SANITY_DATASET: z.string().min(1),
   },
 
   /**
@@ -27,6 +29,8 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
+    SANITY_DATASET: process.env.SANITY_DATASET,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
