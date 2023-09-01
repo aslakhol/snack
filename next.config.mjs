@@ -18,7 +18,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["bilder.kolonial.no"],
+    domains: ["bilder.kolonial.no", "cdn.sanity.io"],
   },
 };
 

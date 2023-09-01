@@ -18,6 +18,7 @@ export default {
       name: 'image',
       title: 'Image',
       type: 'image',
+      hotspot: true,
     },
     {
       name: 'available',

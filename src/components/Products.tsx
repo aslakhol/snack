@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { Product } from "../pages";
+
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
+import { Product } from "../utils/zod";
 
 type Props = { products: Product[] };
 
@@ -11,7 +12,7 @@ export const Products = ({ products }: Props) => {
   return (
     <div className="flex w-full flex-col divide-y p-8">
       {products.map((p) => (
-        <Product key={p.key} product={p} />
+        <Product key={p._id} product={p} />
       ))}
     </div>
   );
@@ -21,18 +22,24 @@ type ProductProps = { product: Product };
 
 const Product = ({ product }: ProductProps) => {
   const [amountInCart, setAmountInCart] = useState(0);
+  console.log(product);
 
   const minusClass = amountInCart <= 0 ? "invisible" : "";
 
   return (
     <div className="flex flex-row py-4">
-      <div className="flex h-24 w-24 justify-center rounded border p-4">
-        <Image
-          alt={product.name}
-          src={product.imageHref}
-          width={96}
-          height={96}
-        />
+      <div className="flex h-24 w-24 justify-center rounded border p-1">
+        {product.image && (
+          <Image
+            className="object-contain"
+            alt={product.name}
+            src={`${product.image.asset.url}?h=384&w=384`}
+            width={product.image.asset.metadata.dimensions.width}
+            height={product.image.asset.metadata.dimensions.height}
+            blurDataURL={product.image.asset.metadata.lqip}
+            layout="responsive"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col justify-between p-4">
         <h4 className="text-md scroll-m-20 font-semibold tracking-tight">
