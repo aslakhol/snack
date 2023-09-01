@@ -3,6 +3,7 @@ import { Product } from "../pages";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
 
 type Props = { products: Product[] };
 
@@ -21,18 +22,20 @@ type ProductProps = { product: Product };
 const Product = ({ product }: ProductProps) => {
   const [amountInCart, setAmountInCart] = useState(0);
 
+  const minusClass = amountInCart <= 0 ? "invisible" : "";
+
   return (
-    <div className="grid min-h-[12rem] grid-cols-3 py-4">
-      <div className="col-span-1 flex justify-center rounded border p-4">
+    <div className="flex flex-row py-4">
+      <div className="flex h-24 w-24 justify-center rounded border p-4">
         <Image
           alt={product.name}
           src={product.imageHref}
-          width={200}
-          height={200}
+          width={96}
+          height={96}
         />
       </div>
-      <div className="col-span-2 flex flex-col justify-between p-4">
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+      <div className="flex flex-1 flex-col justify-between p-4">
+        <h4 className="text-md scroll-m-20 font-semibold tracking-tight">
           {product.name}
         </h4>
         <div className="flex flex-row items-center justify-between">
@@ -42,10 +45,11 @@ const Product = ({ product }: ProductProps) => {
               variant="outline"
               size="icon"
               onClick={() => setAmountInCart((prev) => prev - 1)}
+              className={minusClass}
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <p className="text-lg">{amountInCart}</p>
+            <p className={cn("text-lg", minusClass)}>{amountInCart}</p>
             <Button
               variant="outline"
               size="icon"
