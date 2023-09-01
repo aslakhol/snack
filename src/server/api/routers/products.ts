@@ -1,14 +1,17 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { productSchema } from "../../../utils/zod";
 
 export const productsRouter = createTRPCRouter({
-  getDocumentCount: publicProcedure.query(async ({ ctx }) => {
-    const schema = z.number();
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    const query = `*[_type == "product"]{_id, name, price, available, image }`;
 
-    const data = schema.parse(await ctx.sanity.fetch(`count(*)`));
-    // data is guaranteed to be `number`, or zod will throw an error
-    console.log(`Number of documents: ${data}`);
+    const result: unknown = await ctx.sanity.fetch(query);
+
+    console.log(result, "result");
+
+    const data = z.array(productSchema).parse(result);
 
     return data;
   }),
