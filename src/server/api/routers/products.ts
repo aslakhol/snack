@@ -5,7 +5,7 @@ import { productSchema } from "../../../utils/zod";
 
 export const productsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const query = `*[_type == "product"]{_id, name, price, available, image }`;
+    const query = `*[_type == "product" && available == true]{_id, name, price, image }`;
 
     const result: unknown = await ctx.sanity.fetch(query);
 

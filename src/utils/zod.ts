@@ -9,7 +9,6 @@ export const productSchema = z.object({
   //     url: z.string(),
   //   }),
   // }),
-  available: z.boolean(),
 });
 
 export type Product = z.infer<typeof productSchema>;
