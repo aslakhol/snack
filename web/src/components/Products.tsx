@@ -53,18 +53,25 @@ const Product = ({ product }: ProductProps) => {
         </h4>
         <div className="flex flex-row items-center justify-between">
           <p className="text-lg font-semibold">{product.price} kr</p>
-          <div className="flex w-32 flex-row items-center justify-between gap-2">
+          <div className="flex w-24 flex-row items-center justify-between">
             <Button
               variant="outline"
               size="icon"
               onClick={remove}
-              className={minusClass}
+              className={cn("h-8 w-8", minusClass)}
             >
-              <Minus className="h-4 w-4" />
+              <Minus className="h-3 w-3" />
             </Button>
-            <p className={cn("text-lg", minusClass)}>{product.quantity}</p>
-            <Button variant="outline" size="icon" onClick={add}>
-              <Plus className="h-4 w-4" />
+            <p className={cn("text-sm font-semibold", minusClass)}>
+              {product.quantity}
+            </p>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={add}
+              className="h-8 w-8"
+            >
+              <Plus className="h-3 w-3" />
             </Button>
           </div>
         </div>
