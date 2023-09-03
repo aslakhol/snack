@@ -1,4 +1,3 @@
-import { ShoppingCart } from "lucide-react";
 import { useCartContext } from "../CartProvider";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -15,9 +14,9 @@ export const Cart = () => {
 
   return (
     <div className="fixed bottom-0 flex w-full max-w-2xl flex-row items-center justify-between border-t bg-background px-4 py-4">
-      <Button variant="outline" size="icon">
+      {/* <Button variant="outline" size="icon">
         <ShoppingCart />
-      </Button>
+      </Button> */}
 
       <Button className="bg-[#ff5b24]" asChild>
         <Link href={vippsHref}>Pay with Vipps</Link>
