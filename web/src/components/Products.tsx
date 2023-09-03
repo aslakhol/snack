@@ -10,7 +10,7 @@ type Props = { products: Product[] };
 
 export const Products = ({ products }: Props) => {
   return (
-    <div className="flex w-full flex-col divide-y p-8">
+    <div className="flex w-full flex-col divide-y px-4 py-6">
       {products.map((p) => (
         <Product key={p._id} product={p} />
       ))}
