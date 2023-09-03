@@ -7,7 +7,7 @@ export const SnackSkeleton = ({ isLoading, isError }: Props) => {
   return (
     <>
       <SearchAndFilter />
-      <HowToPay totalAmount={99} />
+      <HowToPay />
       {isLoading && <>Loading...</>}
       {isError && <>Error...</>}
     </>

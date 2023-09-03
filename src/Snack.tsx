@@ -13,7 +13,7 @@ export const Snack = ({ products }: Props) => {
   return (
     <>
       <SearchAndFilter />
-      <HowToPay totalAmount={99} />
+      <HowToPay total={total} />
       <Products products={products} />
       <Cart />
     </>

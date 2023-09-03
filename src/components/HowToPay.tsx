@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-type Props = { totalAmount?: number };
+type Props = { total?: number };
 
-export const HowToPay = ({ totalAmount }: Props) => {
-  const amountPart = totalAmount ? `&a=${totalAmount * 100}` : "";
+export const HowToPay = ({ total }: Props) => {
+  const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
 
-  const vippsHref = `https://qr.vipps.no/28/2/01/031/4747304656?v=1&m=hei${amountPart}`;
+  const vippsHref = `https://qr.vipps.no/28/2/01/031/4747304656?v=1&m=Snack${amountPart}`;
 
   return (
     <div className="flex flex-col gap-4 px-4 py-8">
