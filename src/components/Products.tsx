@@ -37,7 +37,6 @@ const Product = ({ product }: ProductProps) => {
             width={product.image.asset.metadata.dimensions.width}
             height={product.image.asset.metadata.dimensions.height}
             blurDataURL={product.image.asset.metadata.lqip}
-            layout="responsive"
           />
         )}
       </div>
