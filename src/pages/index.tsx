@@ -1,12 +1,12 @@
 import Head from "next/head";
 
 import { api } from "@/utils/api";
-import { SearchAndFilter } from "../components/SearchAndFilter";
-import { HowToPay } from "../components/HowToPay";
-import { Products } from "../components/Products";
+import { Snack } from "../Snack";
+import { SnackSkeleton } from "../SnackSkeleton";
+import CartProvider from "../CartProvider";
 
 export default function Home() {
-  const { data } = api.products.getAll.useQuery();
+  const { data, isLoading, isSuccess } = api.products.getAll.useQuery();
 
   return (
     <>
@@ -20,9 +20,11 @@ export default function Home() {
       </Head>
       <div className="w-screen">
         <main className="flex min-h-screen max-w-2xl flex-col items-center justify-start border-r ">
-          <SearchAndFilter />
-          <HowToPay totalAmount={99} />
-          {data !== undefined && <Products products={data} />}
+          {isLoading ? (
+            <SnackSkeleton isLoading={true} />
+          ) : (
+            <>{!isSuccess ? <SnackSkeleton isError={true} /> : <Snack />}</>
+          )}
         </main>
       </div>
     </>
