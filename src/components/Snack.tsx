@@ -24,6 +24,7 @@ export const Snack = () => {
   return (
     <>
       <SearchAndFilter search={search} setSearch={setSearch} />
+      <div className="py-12" />
       <HowToPay total={total} />
       <Products products={productsToDisplay} />
       {amountOfItemsInCart > 0 && <div className="py-6" />}
