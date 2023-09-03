@@ -23,7 +23,7 @@ export const Cart = () => {
         <Link href={vippsHref}>Pay with Vipps</Link>
       </Button>
 
-      <p className={"text-lg font-semibold"}>kr {total}</p>
+      <p className="w-20 text-right text-lg font-semibold">kr {total}</p>
     </div>
   );
 };
