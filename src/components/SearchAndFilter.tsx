@@ -1,9 +1,11 @@
-import { useState } from "react";
 import { Input } from "./ui/input";
 
-export const SearchAndFilter = () => {
-  const [search, setSearch] = useState("");
+type Props = {
+  search: string;
+  setSearch: (search: string) => void;
+};
 
+export const SearchAndFilter = ({ search, setSearch }: Props) => {
   return (
     <div className="w-full border-b p-4">
       <Input
