@@ -48,11 +48,11 @@ const Product = ({ product }: ProductProps) => {
         )}
       </div>
       <div className="flex flex-1 flex-col justify-between p-4">
-        <h4 className="text-md scroll-m-20 font-semibold tracking-tight">
+        <h4 className="scroll-m-20 text-sm font-semibold tracking-tight">
           {product.name}
         </h4>
         <div className="flex flex-row items-center justify-between">
-          <p className="text-lg font-semibold">{product.price} kr</p>
+          <p className="text-md font-semibold">{product.price} kr</p>
           <div className="flex w-24 flex-row items-center justify-between">
             <Button
               variant="outline"
