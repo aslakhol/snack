@@ -19,6 +19,7 @@ export const productSchema = z.object({
       }),
     })
     .nullable(),
+  quantity: z.number().default(0),
 });
 
 export type Product = z.infer<typeof productSchema>;
