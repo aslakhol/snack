@@ -23,7 +23,15 @@ export default function Home() {
           {isLoading ? (
             <SnackSkeleton isLoading={true} />
           ) : (
-            <>{!isSuccess ? <SnackSkeleton isError={true} /> : <Snack />}</>
+            <>
+              {!isSuccess ? (
+                <SnackSkeleton isError={true} />
+              ) : (
+                <CartProvider products={data}>
+                  <Snack products={data} />
+                </CartProvider>
+              )}
+            </>
           )}
         </main>
       </div>

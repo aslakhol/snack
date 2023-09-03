@@ -1,16 +1,21 @@
-import { api } from "@/utils/api";
+import { useCartContext } from "./CartProvider";
 import { HowToPay } from "./components/HowToPay";
 import { Products } from "./components/Products";
 import { SearchAndFilter } from "./components/SearchAndFilter";
+import { type Product } from "./utils/zod";
 
-export const Snack = () => {
-  const { data } = api.products.getAll.useQuery();
+type Props = { products: Product[] };
+
+export const Snack = ({ products }: Props) => {
+  const { total } = useCartContext();
+
+  console.log(total);
 
   return (
     <>
       <SearchAndFilter />
       <HowToPay totalAmount={99} />
-      {data !== undefined && <Products products={data} />}
+      <Products products={products} />
     </>
   );
 };
