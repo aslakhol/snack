@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 import { Product } from "../utils/zod";
+import { useCartContext } from "../CartProvider";
 
 type Props = { products: Product[] };
 
@@ -22,7 +23,17 @@ type ProductProps = { product: Product };
 
 const Product = ({ product }: ProductProps) => {
   const [amountInCart, setAmountInCart] = useState(0);
-  console.log(product);
+  const { addProduct, removeProduct } = useCartContext();
+
+  const add = () => {
+    addProduct(product._id);
+    setAmountInCart((prev) => prev + 1);
+  };
+
+  const remove = () => {
+    removeProduct(product._id);
+    setAmountInCart((prev) => (prev <= 0 ? prev : prev - 1));
+  };
 
   const minusClass = amountInCart <= 0 ? "invisible" : "";
 
@@ -50,17 +61,13 @@ const Product = ({ product }: ProductProps) => {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => setAmountInCart((prev) => prev - 1)}
+              onClick={remove}
               className={minusClass}
             >
               <Minus className="h-4 w-4" />
             </Button>
             <p className={cn("text-lg", minusClass)}>{amountInCart}</p>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setAmountInCart((prev) => prev + 1)}
-            >
+            <Button variant="outline" size="icon" onClick={add}>
               <Plus className="h-4 w-4" />
             </Button>
           </div>
