@@ -1,9 +1,9 @@
 import Head from "next/head";
 
 import { api } from "@/utils/api";
-import { Snack } from "../Snack";
-import { SnackSkeleton } from "../SnackSkeleton";
+import { Snack } from "../components/Snack";
 import CartProvider from "../CartProvider";
+import { SnackSkeleton } from "../components/SnackSkeleton";
 
 export default function Home() {
   const { data, isLoading, isSuccess } = api.products.getAll.useQuery();

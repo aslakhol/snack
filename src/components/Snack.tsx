@@ -1,9 +1,9 @@
-import { useCartContext } from "./CartProvider";
-import { Cart } from "./components/Cart";
-import { HowToPay } from "./components/HowToPay";
-import { Products } from "./components/Products";
-import { SearchAndFilter } from "./components/SearchAndFilter";
-import { type Product } from "./utils/zod";
+import { useCartContext } from "../CartProvider";
+import { Cart } from "./Cart";
+import { HowToPay } from "./HowToPay";
+import { Products } from "./Products";
+import { SearchAndFilter } from "./SearchAndFilter";
+import { type Product } from "../utils/zod";
 
 type Props = { products: Product[] };
 

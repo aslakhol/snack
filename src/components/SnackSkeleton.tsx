@@ -1,5 +1,5 @@
-import { HowToPay } from "./components/HowToPay";
-import { SearchAndFilter } from "./components/SearchAndFilter";
+import { HowToPay } from "./HowToPay";
+import { SearchAndFilter } from "./SearchAndFilter";
 
 type Props = { isLoading?: boolean; isError?: boolean };
 
