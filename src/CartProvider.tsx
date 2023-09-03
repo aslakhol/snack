@@ -10,6 +10,7 @@ import React, {
 import { type Product } from "./utils/zod";
 
 type CartContextType = {
+  products: Product[];
   productsInCart: Product[];
   total: number;
   amountOfItemsInCart: number;
@@ -21,15 +22,15 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CartProvider = ({
   children,
-  products,
+  productsFromApi,
 }: {
   children: ReactNode;
-  products: Product[];
+  productsFromApi: Product[];
 }) => {
-  const [cart, setCart] = useState(products);
+  const [products, setProducts] = useState(productsFromApi);
 
   const addProduct = useCallback((productId: string) => {
-    setCart((prevCart) => {
+    setProducts((prevCart) => {
       return prevCart.map((cartItem) => {
         if (cartItem._id !== productId) {
           return cartItem;
@@ -44,7 +45,7 @@ const CartProvider = ({
   }, []);
 
   const removeProduct = useCallback((productId: string) => {
-    setCart((prevCart) => {
+    setProducts((prevCart) => {
       return prevCart.map((cartItem) => {
         if (cartItem._id !== productId || cartItem.quantity === 0) {
           return cartItem;
@@ -60,10 +61,10 @@ const CartProvider = ({
 
   const productsInCart: Product[] = useMemo(
     () =>
-      cart.filter((cartItem) => {
+      products.filter((cartItem) => {
         return cartItem.quantity > 0;
       }),
-    [cart],
+    [products],
   );
 
   const total = useMemo(
@@ -85,6 +86,7 @@ const CartProvider = ({
   return (
     <CartContext.Provider
       value={{
+        products,
         addProduct,
         removeProduct,
         productsInCart,

@@ -27,8 +27,8 @@ export default function Home() {
               {!isSuccess ? (
                 <SnackSkeleton isError={true} />
               ) : (
-                <CartProvider products={data}>
-                  <Snack products={data} />
+                <CartProvider productsFromApi={data}>
+                  <Snack />
                 </CartProvider>
               )}
             </>

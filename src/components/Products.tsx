@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 import { Product } from "../utils/zod";
@@ -22,20 +21,17 @@ export const Products = ({ products }: Props) => {
 type ProductProps = { product: Product };
 
 const Product = ({ product }: ProductProps) => {
-  const [amountInCart, setAmountInCart] = useState(product.quantity);
   const { addProduct, removeProduct } = useCartContext();
 
   const add = () => {
     addProduct(product._id);
-    setAmountInCart((prev) => prev + 1);
   };
 
   const remove = () => {
     removeProduct(product._id);
-    setAmountInCart((prev) => (prev <= 0 ? prev : prev - 1));
   };
 
-  const minusClass = amountInCart <= 0 ? "invisible" : "";
+  const minusClass = product.quantity <= 0 ? "invisible" : "";
 
   return (
     <div className="flex flex-row py-4">
@@ -66,7 +62,7 @@ const Product = ({ product }: ProductProps) => {
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <p className={cn("text-lg", minusClass)}>{amountInCart}</p>
+            <p className={cn("text-lg", minusClass)}>{product.quantity}</p>
             <Button variant="outline" size="icon" onClick={add}>
               <Plus className="h-4 w-4" />
             </Button>

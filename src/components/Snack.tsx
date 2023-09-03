@@ -3,13 +3,10 @@ import { Cart } from "./Cart";
 import { HowToPay } from "./HowToPay";
 import { Products } from "./Products";
 import { SearchAndFilter } from "./SearchAndFilter";
-import { type Product } from "../utils/zod";
 import { useState } from "react";
 
-type Props = { products: Product[] };
-
-export const Snack = ({ products }: Props) => {
-  const { total, amountOfItemsInCart } = useCartContext();
+export const Snack = () => {
+  const { total, amountOfItemsInCart, products } = useCartContext();
   const [search, setSearch] = useState("");
 
   const filterProducts = (search: string) => {
