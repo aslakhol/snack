@@ -34,8 +34,8 @@ const Product = ({ product }: ProductProps) => {
   const minusClass = product.quantity <= 0 ? "invisible" : "";
 
   return (
-    <div className="flex flex-row py-4">
-      <div className="flex h-24 w-24 justify-center rounded border p-1">
+    <div className="flex flex-row py-2">
+      <div className="flex h-16 w-16 justify-center rounded border p-1">
         {product.image && (
           <Image
             className="object-contain"
@@ -47,7 +47,7 @@ const Product = ({ product }: ProductProps) => {
           />
         )}
       </div>
-      <div className="flex flex-1 flex-col justify-between p-4">
+      <div className="flex flex-1 flex-col justify-between px-4">
         <h4 className="scroll-m-20 text-sm font-semibold tracking-tight">
           {product.name}
         </h4>
