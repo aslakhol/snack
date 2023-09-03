@@ -10,7 +10,6 @@ import React, {
 import { type Product } from "./utils/zod";
 
 type CartContextType = {
-  cart: Product[];
   productsInCart: Product[];
   total: number;
   amountOfItemsInCart: number;
@@ -86,7 +85,6 @@ const CartProvider = ({
   return (
     <CartContext.Provider
       value={{
-        cart,
         addProduct,
         removeProduct,
         productsInCart,
