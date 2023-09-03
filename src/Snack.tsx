@@ -8,13 +8,14 @@ import { type Product } from "./utils/zod";
 type Props = { products: Product[] };
 
 export const Snack = ({ products }: Props) => {
-  const { total } = useCartContext();
+  const { total, amountOfItemsInCart } = useCartContext();
 
   return (
     <>
       <SearchAndFilter />
       <HowToPay total={total} />
       <Products products={products} />
+      {amountOfItemsInCart > 0 && <div className="py-6" />}
       <Cart />
     </>
   );

@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { getVippsLink } from "../utils/vipps";
 
 type Props = { total?: number };
 
 export const HowToPay = ({ total }: Props) => {
-  const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
-
-  const vippsHref = `https://qr.vipps.no/28/2/01/031/4747304656?v=1&m=Snack${amountPart}`;
+  const vippsHref = getVippsLink(total);
 
   return (
     <div className="flex flex-col gap-4 px-4 py-8">

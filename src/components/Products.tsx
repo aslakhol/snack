@@ -22,7 +22,7 @@ export const Products = ({ products }: Props) => {
 type ProductProps = { product: Product };
 
 const Product = ({ product }: ProductProps) => {
-  const [amountInCart, setAmountInCart] = useState(0);
+  const [amountInCart, setAmountInCart] = useState(product.quantity);
   const { addProduct, removeProduct } = useCartContext();
 
   const add = () => {

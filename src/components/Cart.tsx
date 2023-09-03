@@ -1,7 +1,29 @@
+import { ShoppingCart } from "lucide-react";
 import { useCartContext } from "../CartProvider";
-import { type Product } from "../utils/zod";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { getVippsLink } from "../utils/vipps";
 
 export const Cart = () => {
-  const { total } = useCartContext();
-  return <>{total}</>;
+  const { total, amountOfItemsInCart } = useCartContext();
+
+  const vippsHref = getVippsLink(total);
+
+  if (amountOfItemsInCart <= 0) {
+    return null;
+  }
+
+  return (
+    <div className="fixed bottom-0 flex w-full flex-row items-center justify-between border-t bg-background px-8 py-4">
+      <Button variant="outline" size="icon">
+        <ShoppingCart />
+      </Button>
+
+      <Button className="bg-[#ff5b24]" asChild>
+        <Link href={vippsHref}>Pay with Vipps</Link>
+      </Button>
+
+      <p className={"text-lg font-semibold"}>kr {total}</p>
+    </div>
+  );
 };
