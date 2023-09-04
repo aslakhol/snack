@@ -5,12 +5,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
-    "@prisma/client": "^5.1.1",
     "@radix-ui/react-slot": "^1.0.2",
     "@sanity/client": "^6.4.9",
     "@t3-oss/env-nextjs": "^0.6.0",
@@ -43,7 +41,6 @@
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
-    "prisma": "^5.1.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6"
   },
