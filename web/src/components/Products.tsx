@@ -59,6 +59,7 @@ const Product = ({ product }: ProductProps) => {
               size="icon"
               onClick={remove}
               className={cn("h-8 w-8", minusClass)}
+              aria-label={`Remove ${product.name} from cart`}
             >
               <Minus className="h-3 w-3" />
             </Button>
@@ -70,6 +71,7 @@ const Product = ({ product }: ProductProps) => {
               size="icon"
               onClick={add}
               className="h-8 w-8"
+              aria-label={`Add ${product.name} to cart`}
             >
               <Plus className="h-3 w-3" />
             </Button>
