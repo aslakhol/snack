@@ -25,7 +25,7 @@ const config = {
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
   },
-  ignorePatterns: ["src/components/ui"],
+  ignorePatterns: ["src/components/ui", "public"],
 };
 
 module.exports = config;

@@ -17,6 +17,8 @@ export default function Home() {
           content="An app to keep track of snacks at the office"
         />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#ffffff" />
       </Head>
       <div className="w-screen">
         <main className="flex min-h-screen max-w-2xl flex-col items-center justify-start border-r ">
