@@ -16,7 +16,11 @@ export const SnackSkeleton = ({ isLoading, isError }: Props) => {
 
   return (
     <>
-      <SearchAndFilter search="" setSearch={() => ""} />
+      <SearchAndFilter
+        search=""
+        setSearch={() => ""}
+        selectedCategoryIds={[]}
+      />
       <div className="py-12" />
 
       <HowToPay />

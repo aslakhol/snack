@@ -10,6 +10,7 @@ import { useState } from "react";
 export const Snack = () => {
   const { total, amountOfItemsInCart, products } = useCartContext();
   const [search, setSearch] = useState("");
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
 
   const filterProducts = (search: string) => {
     if (search === "") {
@@ -25,8 +26,13 @@ export const Snack = () => {
 
   return (
     <>
-      <SearchAndFilter search={search} setSearch={setSearch} />
-      <div className="py-12" />
+      <SearchAndFilter
+        search={search}
+        setSearch={setSearch}
+        selectedCategoryIds={selectedCategoryIds}
+        setSelectedCategoryIds={setSelectedCategoryIds}
+      />
+      <div className="py-16" />
       <HowToPay total={total} />
       <Products products={productsToDisplay} />
       <RequestLink />
