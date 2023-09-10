@@ -1,4 +1,5 @@
 import { useCartContext } from "../CartProvider";
+import { cn } from "../lib/utils";
 import { Cart } from "./Cart";
 import { HowToPay } from "./HowToPay";
 import { Products } from "./Products";
@@ -29,7 +30,7 @@ export const Snack = () => {
       <HowToPay total={total} />
       <Products products={productsToDisplay} />
       <RequestLink />
-      {amountOfItemsInCart > 0 && <div className="py-6" />}
+      <div className={cn(amountOfItemsInCart ? "py-12" : "py-6")} />
       <Cart />
     </>
   );
