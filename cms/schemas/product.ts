@@ -28,6 +28,6 @@ export default {
     },
   ],
   preview: {
-    select: {title: 'name'},
+    select: {title: 'name', subtitle: 'price'},
   },
 }
