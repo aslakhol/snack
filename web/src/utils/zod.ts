@@ -1,9 +1,17 @@
 import { z } from "zod";
 
+export const categorySchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+});
+
+export type Category = z.infer<typeof categorySchema>;
+
 export const productSchema = z.object({
   _id: z.string(),
   name: z.string(),
   price: z.number(),
+  category: categorySchema,
   image: z
     .object({
       asset: z.object({
