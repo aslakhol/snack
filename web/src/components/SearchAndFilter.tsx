@@ -2,6 +2,7 @@ import { type Dispatch, type SetStateAction } from "react";
 import { api } from "../utils/api";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { cn } from "../lib/utils";
 
 type Props = {
   search: string;
@@ -47,6 +48,7 @@ export const SearchAndFilter = ({
               variant={
                 selectedCategoryId === category._id ? "secondary" : "outline"
               }
+              className={cn(selectedCategoryId === category._id && "outline")}
               size={"sm"}
               onClick={() => toggleCategory(category._id)}
             >
