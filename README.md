@@ -13,10 +13,7 @@ For future reference the url pattern is: `https://qr.vipps.no/28/2/01/031/${phon
 
 The users can access the app through [snack.aslak.io](https://snack.aslak.io) or with the poster posted on the fridge.
 
-<p align="center">
-  <img width="300" height="432" src="https://github.com/aslakhol/snack/assets/11901064/14f1ae87-4a54-4063-9c95-987d238ff057">
-</p>
-
+<img align="right" width="300" height="432" src="https://github.com/aslakhol/snack/assets/11901064/14f1ae87-4a54-4063-9c95-987d238ff057">
 
 ## Web
 
