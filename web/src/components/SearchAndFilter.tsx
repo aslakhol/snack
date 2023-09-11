@@ -6,30 +6,28 @@ import { Input } from "./ui/input";
 type Props = {
   search: string;
   setSearch: (search: string) => void;
-  selectedCategoryIds: string[];
-  setSelectedCategoryIds?: Dispatch<SetStateAction<string[]>>;
+  selectedCategoryId: string | undefined;
+  setSelectedCategoryId?: Dispatch<SetStateAction<string | undefined>>;
 };
 
 export const SearchAndFilter = ({
   search,
   setSearch,
-  selectedCategoryIds,
-  setSelectedCategoryIds,
+  selectedCategoryId,
+  setSelectedCategoryId,
 }: Props) => {
   const { data, isSuccess } = api.products.getCategories.useQuery();
 
   const toggleCategory = (id: string) => {
-    if (!setSelectedCategoryIds) {
+    if (!setSelectedCategoryId) {
       return;
     }
 
-    setSelectedCategoryIds((prev) => {
-      const isSelected = prev.includes(id);
-
-      if (!isSelected) {
-        return [...prev, id];
+    setSelectedCategoryId((prev) => {
+      if (prev === id) {
+        return undefined;
       }
-      return prev.filter((categoryId) => categoryId !== id);
+      return id;
     });
   };
 
@@ -47,9 +45,7 @@ export const SearchAndFilter = ({
             <Button
               key={category._id}
               variant={
-                selectedCategoryIds.includes(category._id)
-                  ? "secondary"
-                  : "outline"
+                selectedCategoryId === category._id ? "secondary" : "outline"
               }
               size={"sm"}
               onClick={() => toggleCategory(category._id)}

@@ -11,7 +11,7 @@ import { useState } from "react";
 export const Snack = () => {
   const { total, amountOfItemsInCart, products } = useCartContext();
   const [search, setSearch] = useState("");
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>();
 
   const filterProducts = () => {
     return products.filter(filterCategory).filter(filterSearch);
@@ -26,11 +26,11 @@ export const Snack = () => {
   };
 
   const filterCategory = (product: Product) => {
-    if (selectedCategoryIds.length === 0) {
+    if (!selectedCategoryId) {
       return product;
     }
 
-    return selectedCategoryIds.includes(product.category._id);
+    return selectedCategoryId === product.category._id;
   };
 
   const productsToDisplay = filterProducts();
@@ -40,8 +40,8 @@ export const Snack = () => {
       <SearchAndFilter
         search={search}
         setSearch={setSearch}
-        selectedCategoryIds={selectedCategoryIds}
-        setSelectedCategoryIds={setSelectedCategoryIds}
+        selectedCategoryId={selectedCategoryId}
+        setSelectedCategoryId={setSelectedCategoryId}
       />
       <div className="py-16" />
       <HowToPay total={total} />
