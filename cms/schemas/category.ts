@@ -9,8 +9,15 @@ export default {
       type: 'string',
       description: 'Name of Category.',
     },
+    {
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number',
+      description:
+        'Number decides the order of categories both in category bar and in the product list.',
+    },
   ],
   preview: {
-    select: {title: 'name'},
+    select: {title: 'name', subtitle: 'sortOrder'},
   },
 }
