@@ -11,7 +11,10 @@ For future reference the url pattern is: `https://qr.vipps.no/28/2/01/031/${phon
 `message` is whatever message you want for the vipps, in our case `Snack`.
 `amount` is the price in øre.
 
-The users can access the app through [snack.aslak.io](https://snack.aslak.io) or with the poster posted on the fridge
+The users can access the app through [snack.aslak.io](https://snack.aslak.io) or with the poster posted on the fridge.
+
+![image](https://github.com/aslakhol/snack/assets/11901064/14f1ae87-4a54-4063-9c95-987d238ff057)
+
 
 ## Web
 
