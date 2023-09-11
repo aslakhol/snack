@@ -1,4 +1,5 @@
 import { type AppType } from "next/app";
+import { Analytics } from "@vercel/analytics/react";
 
 import { api } from "@/utils/api";
 
@@ -14,7 +15,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     }
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Analytics />
+      <Component {...pageProps} />
+    </>
+  );
 };
 
 export default api.withTRPC(MyApp);
