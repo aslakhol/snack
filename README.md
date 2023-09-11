@@ -1,27 +1,37 @@
-# Create T3 App
+# Snack
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Snack is a web app for running the fridge at Aleap.
+The goal is to make purchasing seamless and keep everything light and breezy.
 
-## What's next? How do I make an app with this?
+On [snack.aslak.io](https://snack.aslak.io) the user can see what products are available, filter based on search and categories as well as purchase.
+Purchasing is simply a button with link to Vipps, and through guessing the url parameters we managed to auto fill in the amount, and a string for the message.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+For future reference the url pattern is: `https://qr.vipps.no/28/2/01/031/${phone}?v=1&m={message}&a=${amount}`
+`phone` is the phone number you are sending the payment to.
+`message` is whatever message you want for the vipps, in our case `Snack`.
+`amount` is the price in øre.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+The users can access the app through [snack.aslak.io](https://snack.aslak.io) or with the poster posted on the fridge
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Web
 
-## Learn More
+The web project can be found in `/web`. It is running `Next.js`, using `trpc` and `tailwind` with `shadcn/ui`.
+The project was bootstrapped with `create-t3-app`.
+The project is hosted on `Vercel` and is available at [snack.aslak.io](https://snack.aslak.io).
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Relevant commands
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+`npm run dev` makes the app available on localhost:3000
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Note that there aren't separate datasets for development and production, and as such you need access to the internet for development.
 
-## How do I deploy this?
+## CMS
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+In `/cms` you'll find a `Sanity CMS` project for organising the products.
+The cms is hosted by `Sanity` and is available at [snack.sanity.studio](https://snack.sanity.studio)
+
+### Relevant commands
+
+`npm run dev` makes the studio available on localhost:3333
+`npm run deploy` deploys the studio to sanity's servers.
+This is necessary to see data that follows the updated schema, even locally, as we are not running separate datasets for production and development.
