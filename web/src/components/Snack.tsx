@@ -1,5 +1,6 @@
 import { useCartContext } from "../CartProvider";
 import { cn } from "../lib/utils";
+import { type Product } from "../utils/zod";
 import { Cart } from "./Cart";
 import { HowToPay } from "./HowToPay";
 import { Products } from "./Products";
@@ -12,17 +13,27 @@ export const Snack = () => {
   const [search, setSearch] = useState("");
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
 
-  const filterProducts = (search: string) => {
-    if (search === "") {
-      return products;
-    }
-
-    return products.filter((product) => {
-      return product.name.toLowerCase().includes(search.toLowerCase());
-    });
+  const filterProducts = () => {
+    return products.filter(filterCategory).filter(filterSearch);
   };
 
-  const productsToDisplay = filterProducts(search);
+  const filterSearch = (product: Product) => {
+    if (search === "") {
+      return product;
+    }
+
+    return product.name.toLowerCase().includes(search.toLowerCase());
+  };
+
+  const filterCategory = (product: Product) => {
+    if (selectedCategoryIds.length === 0) {
+      return product;
+    }
+
+    return selectedCategoryIds.includes(product.category._id);
+  };
+
+  const productsToDisplay = filterProducts();
 
   return (
     <>
