@@ -5,14 +5,30 @@ import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
 import { Product } from "../utils/zod";
 import { useCartContext } from "../CartProvider";
+import { api } from "../utils/api";
 
 type Props = { products: Product[] };
 
 export const Products = ({ products }: Props) => {
+  const productsByCategory = groupProductByCategory(products);
+
+  const { data: categories, isSuccess } = api.products.getCategories.useQuery();
+
+  if (!isSuccess) {
+    return;
+  }
+
   return (
-    <div className="flex w-full flex-col divide-y px-4 py-6">
-      {products.map((p) => (
-        <Product key={p._id} product={p} />
+    <div className="flex w-full flex-col px-4 py-6">
+      {categories.map((c) => (
+        <div key={c._id} className="pb-8">
+          <p className="text-sm text-muted-foreground">{c.name}</p>
+          <div className="divide-y">
+            {productsByCategory[c.name]?.map((p) => (
+              <Product key={p._id} product={p} />
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -80,4 +96,23 @@ const Product = ({ product }: ProductProps) => {
       </div>
     </div>
   );
+};
+
+const groupProductByCategory = (products: Product[]) => {
+  const categories = products.reduce(
+    (acc, product) => {
+      const category = product.category.name;
+
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+
+      acc[category]?.push(product);
+
+      return acc;
+    },
+    {} as Record<string, Product[]>,
+  );
+
+  return categories;
 };
