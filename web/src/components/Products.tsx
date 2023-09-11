@@ -20,16 +20,25 @@ export const Products = ({ products }: Props) => {
 
   return (
     <div className="flex w-full flex-col px-4 py-6">
-      {categories.map((c) => (
-        <div key={c._id} className="pb-8">
-          <p className="text-sm text-muted-foreground">{c.name}</p>
-          <div className="divide-y">
-            {productsByCategory[c.name]?.map((p) => (
-              <Product key={p._id} product={p} />
-            ))}
+      {categories.map((c) => {
+        if (
+          productsByCategory[c.name] === undefined ||
+          productsByCategory[c.name]?.length === 0
+        ) {
+          return null;
+        }
+
+        return (
+          <div key={c._id} className="pb-8">
+            <p className="text-sm text-muted-foreground">{c.name}</p>
+            <div className="divide-y">
+              {productsByCategory[c.name]?.map((p) => (
+                <Product key={p._id} product={p} />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
