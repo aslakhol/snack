@@ -1,5 +1,5 @@
 # Snack
-<img align="right" width="300" height="432" src="https://github.com/aslakhol/snack/assets/11901064/14f1ae87-4a54-4063-9c95-987d238ff057">
+<img align="right" width="278" height="400" src="https://github.com/aslakhol/snack/assets/11901064/14f1ae87-4a54-4063-9c95-987d238ff057">
 
 Snack is a web app for running the fridge at Aleap.
 The goal is to make purchasing seamless and keep everything light and breezy.
