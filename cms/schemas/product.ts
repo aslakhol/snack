@@ -34,6 +34,15 @@ export default {
     },
   ],
   preview: {
-    select: {title: 'name', subtitle: 'price'},
+    select: {name: 'name', price: 'price', available: 'available', media: 'image'},
+    prepare(selection: {name: string; price: number; available: boolean; media: unknown}) {
+      const {name, price, available, media} = selection
+
+      return {
+        title: name,
+        subtitle: `${price} kr - ${available ? '❎' : '🔴'}`,
+        media,
+      }
+    },
   },
 }
