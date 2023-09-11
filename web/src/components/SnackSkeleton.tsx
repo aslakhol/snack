@@ -19,7 +19,7 @@ export const SnackSkeleton = ({ isLoading, isError }: Props) => {
       <SearchAndFilter
         search=""
         setSearch={() => ""}
-        selectedCategoryIds={[]}
+        selectedCategoryId={undefined}
       />
       <div className="py-12" />
 
