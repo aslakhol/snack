@@ -16,8 +16,8 @@ const getMessage = (products: Product[]) => {
   }
 
   if (products.length === 1 && products[0]) {
-    return products[0].slug.current;
+    return `Snack-${products[0].slug.current}`;
   }
 
-  return `Snack: ${products.length}`;
+  return `Snack-${products.length}`;
 };
