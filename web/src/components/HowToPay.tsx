@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { getVippsLink } from "../utils/vipps";
+import { type Product } from "../utils/zod";
 
-type Props = { total?: number };
+type Props = { productsInCart: Product[]; total?: number };
 
-export const HowToPay = ({ total }: Props) => {
-  const vippsHref = getVippsLink(total);
+export const HowToPay = ({ productsInCart, total }: Props) => {
+  const vippsHref = getVippsLink(productsInCart, total);
 
   return (
     <div className="flex flex-col gap-3 px-4">

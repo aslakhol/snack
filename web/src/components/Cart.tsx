@@ -4,9 +4,9 @@ import Link from "next/link";
 import { getVippsLink } from "../utils/vipps";
 
 export const Cart = () => {
-  const { total, amountOfItemsInCart } = useCartContext();
+  const { total, amountOfItemsInCart, productsInCart } = useCartContext();
 
-  const vippsHref = getVippsLink(total);
+  const vippsHref = getVippsLink(productsInCart, total);
 
   if (amountOfItemsInCart <= 0) {
     return null;

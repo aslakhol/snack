@@ -10,6 +10,23 @@ export default {
       type: 'string',
     },
     {
+      title: 'Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+        maxLength: 10,
+        slugify: (input: string) =>
+          input
+            .toLowerCase()
+            .replace(/\b[a-z]{1,2}\b/g, '')
+            .replace(/\d+/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .slice(0, 20),
+      },
+    },
+    {
       name: 'price',
       title: 'Price',
       type: 'number',

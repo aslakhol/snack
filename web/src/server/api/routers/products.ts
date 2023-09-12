@@ -5,7 +5,7 @@ import { productSchema, categorySchema } from "../../../utils/zod";
 
 export const productsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const query = `*[_type == "product" && available == true]{_id, name, price, category->{_id, name, sortOrder}, image {
+    const query = `*[_type == "product" && available == true]{_id, name, price, slug, category->{_id, name, sortOrder}, image {
       asset->{
         ...,
         metadata

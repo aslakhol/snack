@@ -23,7 +23,7 @@ export const SnackSkeleton = ({ isLoading, isError }: Props) => {
       />
       <div className="py-12" />
 
-      <HowToPay />
+      <HowToPay productsInCart={[]} />
       <div
         className={cn(
           "flex flex-1 items-center transition-opacity duration-300 ease-in-out",

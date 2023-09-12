@@ -11,6 +11,7 @@ export type Category = z.infer<typeof categorySchema>;
 export const productSchema = z.object({
   _id: z.string(),
   name: z.string(),
+  slug: z.object({ current: z.string().optional() }),
   price: z.number(),
   category: categorySchema,
   image: z
