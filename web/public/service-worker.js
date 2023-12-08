@@ -27,6 +27,12 @@ const cacheClone = async (e) => {
 
 const fetchEvent = () => {
   self.addEventListener("fetch", (e) => {
+    console.log(e, "fetch event");
+
+    if (e.request.url.startsWith("https://snack.aslak.io/ingest")) {
+      e.respondWith(fetch(e.request));
+    }
+
     e.respondWith(
       cacheClone(e)
         .catch(() => caches.match(e.request))

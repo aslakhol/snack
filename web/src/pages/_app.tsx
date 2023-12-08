@@ -10,7 +10,10 @@ import { env } from "../env.mjs";
 
 if (typeof window !== "undefined") {
   posthog.init(env.NEXT_PUBLIC_POSTHOG_API_KEY, {
-    api_host: "https://snack.aslak.io/ingest",
+    api_host:
+      process.env.NODE_ENV === "development"
+        ? "localhost:3000/ingest"
+        : "https://snack.aslak.io/ingest",
     loaded: (posthog) => {
       if (process.env.NODE_ENV === "development") posthog.debug();
     },
