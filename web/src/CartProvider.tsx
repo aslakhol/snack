@@ -6,9 +6,9 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import posthog from "posthog-js";
 
 import { type Product } from "./utils/zod";
+import posthog from "posthog-js";
 
 type CartContextType = {
   products: Product[];
@@ -31,6 +31,7 @@ const CartProvider = ({
   const [products, setProducts] = useState(productsFromApi);
 
   const addProduct = useCallback((product: Product) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     posthog.capture("add product to cart", { product: product.name });
 
     setProducts((prevCart) => {
