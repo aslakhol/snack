@@ -19,7 +19,13 @@ export const Cart = () => {
       </Button> */}
 
       <Button className="bg-[#ff5b24]" asChild>
-        <Link href={vippsHref}>Pay with Vipps</Link>
+        <Link
+          href={vippsHref}
+          aria-label="Pay with Vipps in Cart"
+          data-ph-capture-attribute-cart-value={total}
+        >
+          Pay with Vipps
+        </Link>
       </Button>
 
       <p className="w-20 text-right text-lg font-semibold">kr {total}</p>

@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import posthog from "posthog-js";
 
 import { type Product } from "./utils/zod";
 
@@ -14,8 +15,8 @@ type CartContextType = {
   productsInCart: Product[];
   total: number;
   amountOfItemsInCart: number;
-  addProduct: (productId: string) => void;
-  removeProduct: (productId: string) => void;
+  addProduct: (product: Product) => void;
+  removeProduct: (product: Product) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -29,10 +30,12 @@ const CartProvider = ({
 }) => {
   const [products, setProducts] = useState(productsFromApi);
 
-  const addProduct = useCallback((productId: string) => {
+  const addProduct = useCallback((product: Product) => {
+    posthog.capture("add product to cart", { product: product.name });
+
     setProducts((prevCart) => {
       return prevCart.map((cartItem) => {
-        if (cartItem._id !== productId) {
+        if (cartItem._id !== product._id) {
           return cartItem;
         }
 
@@ -44,10 +47,10 @@ const CartProvider = ({
     });
   }, []);
 
-  const removeProduct = useCallback((productId: string) => {
+  const removeProduct = useCallback((product: Product) => {
     setProducts((prevCart) => {
       return prevCart.map((cartItem) => {
-        if (cartItem._id !== productId || cartItem.quantity === 0) {
+        if (cartItem._id !== product._id || cartItem.quantity === 0) {
           return cartItem;
         }
 

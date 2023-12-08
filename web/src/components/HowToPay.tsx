@@ -20,7 +20,13 @@ export const HowToPay = ({ productsInCart, total }: Props) => {
         Or click here to go directly to Vipps
       </h3>
       <Button className="bg-[#ff5b24]" asChild>
-        <Link href={vippsHref}>Pay with Vipps</Link>
+        <Link
+          href={vippsHref}
+          data-ph-capture-attribute-cart-value={total}
+          aria-label="Pay with Vipps in HowToPay"
+        >
+          Pay with Vipps
+        </Link>
       </Button>
     </div>
   );

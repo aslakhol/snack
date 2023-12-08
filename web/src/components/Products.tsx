@@ -49,11 +49,11 @@ const Product = ({ product }: ProductProps) => {
   const { addProduct, removeProduct } = useCartContext();
 
   const add = () => {
-    addProduct(product._id);
+    addProduct(product);
   };
 
   const remove = () => {
-    removeProduct(product._id);
+    removeProduct(product);
   };
 
   const minusClass = product.quantity <= 0 ? "invisible" : "";
