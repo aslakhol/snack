@@ -21,13 +21,13 @@ if (typeof window !== "undefined") {
 }
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      void navigator.serviceWorker
-        .register("/service-worker.js", { scope: "/" })
-        .then((registration) => console.log("scope is: ", registration.scope));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator) {
+  //     void navigator.serviceWorker
+  //       .register("/service-worker.js", { scope: "/" })
+  //       .then((registration) => console.log("scope is: ", registration.scope));
+  //   }
+  // }, []);
 
   return (
     <>
