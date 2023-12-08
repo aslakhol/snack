@@ -31,6 +31,10 @@ const fetchEvent = () => {
       return false;
     }
 
+    if (e.request.url.startsWith("https://snack.aslak.io/_vercel/")) {
+      return false;
+    }
+
     e.respondWith(
       cacheClone(e)
         .catch(() => caches.match(e.request))
