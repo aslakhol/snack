@@ -23,6 +23,7 @@ export const HowToPay = ({ productsInCart, total }: Props) => {
         <Link
           href={vippsHref}
           data-ph-capture-attribute-cart-value={total}
+          data-ph-capture-attribute-empty-cart={productsInCart.length <= 0}
           aria-label="Pay with Vipps in HowToPay"
         >
           Pay with Vipps
