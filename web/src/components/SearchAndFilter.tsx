@@ -3,6 +3,8 @@ import { api } from "../utils/api";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { cn } from "../lib/utils";
+import { usePostHog } from "posthog-js/react";
+import { type Category } from "../utils/zod";
 
 type Props = {
   search: string;
@@ -18,23 +20,36 @@ export const SearchAndFilter = ({
   setSelectedCategoryId,
 }: Props) => {
   const { data, isSuccess } = api.products.getCategories.useQuery();
+  const posthog = usePostHog();
 
-  const toggleCategory = (id: string) => {
+  const toggleCategory = (category: Category) => {
     if (!setSelectedCategoryId) {
       return;
     }
 
     setSelectedCategoryId((prev) => {
-      if (prev === id) {
+      if (prev === category._id) {
+        posthog.capture("deselect category", {
+          categoryId: category._id,
+          categoryName: category.name,
+        });
+
         return undefined;
       }
-      return id;
+
+      posthog.capture("select category", {
+        categoryId: category._id,
+        categoryName: category.name,
+        prevCategoryId: prev,
+      });
+      return category._id;
     });
   };
 
   return (
     <div className="fixed top-0 w-full max-w-2xl border-b bg-background px-4 pb-2 pt-4">
       <Input
+        aria-label="Search for a product"
         placeholder="Search for a product..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -50,7 +65,7 @@ export const SearchAndFilter = ({
               }
               className={cn(selectedCategoryId === category._id && "outline")}
               size={"sm"}
-              onClick={() => toggleCategory(category._id)}
+              onClick={() => toggleCategory(category)}
             >
               {category.name}
             </Button>
