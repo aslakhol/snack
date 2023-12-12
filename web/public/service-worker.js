@@ -27,6 +27,10 @@ const cacheClone = async (e) => {
 
 const fetchEvent = () => {
   self.addEventListener("fetch", (e) => {
+    if (e.request.url.startsWith("http://localhost:3000/ingest")) {
+      return false;
+    }
+
     if (e.request.url.startsWith("https://snack.aslak.io/ingest")) {
       return false;
     }
