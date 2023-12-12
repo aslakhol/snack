@@ -1,6 +1,7 @@
 import { type AppType } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
 import { api } from "@/utils/api";
 
@@ -30,10 +31,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <>
+    <PostHogProvider client={posthog}>
       <Analytics />
       <Component {...pageProps} />
-    </>
+    </PostHogProvider>
   );
 };
 
