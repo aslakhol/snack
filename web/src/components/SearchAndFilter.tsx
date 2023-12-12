@@ -49,6 +49,7 @@ export const SearchAndFilter = ({
   return (
     <div className="fixed top-0 w-full max-w-2xl border-b bg-background px-4 pb-2 pt-4">
       <Input
+        id="search"
         className="text-md"
         aria-label="Search for a product"
         placeholder="Search for a product..."
