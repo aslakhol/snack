@@ -64,7 +64,9 @@ export const SearchAndFilter = ({
               variant={
                 selectedCategoryId === category._id ? "secondary" : "outline"
               }
-              className={cn(selectedCategoryId === category._id && "outline")}
+              className={cn(
+                selectedCategoryId === category._id && "bg-primary/50 outline",
+              )}
               size={"sm"}
               onClick={() => toggleCategory(category)}
             >
