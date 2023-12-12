@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "./ui/button";
 import { getVippsLink } from "../utils/vipps";
 import { type Product } from "../utils/zod";
