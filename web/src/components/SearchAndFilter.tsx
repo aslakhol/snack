@@ -19,8 +19,15 @@ export const SearchAndFilter = ({
   selectedCategoryId,
   setSelectedCategoryId,
 }: Props) => {
-  const { data, isSuccess } = api.products.getCategories.useQuery();
+  const { data } = api.products.getCategories.useQuery();
+  const { data: productsData } = api.products.getAll.useQuery();
   const posthog = usePostHog();
+
+  const categoriesWithProducts =
+    data?.filter(
+      (category) =>
+        productsData?.some((product) => product.category._id === category._id),
+    ) ?? [];
 
   const toggleCategory = (category: Category) => {
     if (!setSelectedCategoryId) {
@@ -58,22 +65,21 @@ export const SearchAndFilter = ({
       />
 
       <div className="flex flex-row gap-2 pt-2">
-        {isSuccess &&
-          data.map((category) => (
-            <Button
-              key={category._id}
-              variant={
-                selectedCategoryId === category._id ? "secondary" : "outline"
-              }
-              className={cn(
-                selectedCategoryId === category._id && "bg-primary/50 outline",
-              )}
-              size={"sm"}
-              onClick={() => toggleCategory(category)}
-            >
-              {category.name}
-            </Button>
-          ))}
+        {categoriesWithProducts.map((category) => (
+          <Button
+            key={category._id}
+            variant={
+              selectedCategoryId === category._id ? "secondary" : "outline"
+            }
+            className={cn(
+              selectedCategoryId === category._id && "bg-primary/50 outline",
+            )}
+            size={"sm"}
+            onClick={() => toggleCategory(category)}
+          >
+            {category.name}
+          </Button>
+        ))}
       </div>
     </div>
   );
