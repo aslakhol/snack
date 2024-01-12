@@ -20,3 +20,11 @@ export const storeRecentIds = (productsInCart: Product[]) => {
 
   window.localStorage.setItem(PRODUCTS_KEY, JSON.stringify(newRecent));
 };
+
+export const getRecentIds = () => {
+  const existing = JSON.parse(
+    window.localStorage.getItem(PRODUCTS_KEY) ?? "[]",
+  ) as string[];
+
+  return existing;
+};
