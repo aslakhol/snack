@@ -9,6 +9,10 @@ export const RecentProducts = ({ products }: Props) => {
 
   const recentProducts = products.filter((p) => recentIds.includes(p._id));
 
+  if (recentProducts.length === 0) {
+    return null;
+  }
+
   return (
     <div className="pb-8">
       <p className="text-sm text-muted-foreground">Recent</p>
