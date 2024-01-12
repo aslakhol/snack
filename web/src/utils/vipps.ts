@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { type Product } from "./zod";
 import { usePostHog } from "posthog-js/react";
 
-export const getVippsLink = (products: Product[], total?: number) => {
+const getVippsLink = (products: Product[], total?: number) => {
   const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
 
   const message = getMessage(products);
