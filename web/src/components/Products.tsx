@@ -3,9 +3,10 @@ import Image from "next/image";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
-import { Product } from "../utils/zod";
+import { type Product } from "../utils/zod";
 import { useCartContext } from "../CartProvider";
 import { api } from "../utils/api";
+import { RecentProducts } from "./Recent";
 
 type Props = { products: Product[] };
 
@@ -20,6 +21,7 @@ export const Products = ({ products }: Props) => {
 
   return (
     <div className="flex w-full flex-col px-4 py-6">
+      <RecentProducts products={products} />
       {categories.map((c) => {
         if (
           productsByCategory[c.name] === undefined ||
@@ -33,7 +35,7 @@ export const Products = ({ products }: Props) => {
             <p className="text-sm text-muted-foreground">{c.name}</p>
             <div className="divide-y">
               {productsByCategory[c.name]?.map((p) => (
-                <Product key={p._id} product={p} />
+                <ProductRow key={p._id} product={p} />
               ))}
             </div>
           </div>
@@ -43,9 +45,9 @@ export const Products = ({ products }: Props) => {
   );
 };
 
-type ProductProps = { product: Product };
+type ProductRowProps = { product: Product };
 
-const Product = ({ product }: ProductProps) => {
+export const ProductRow = ({ product }: ProductRowProps) => {
   const { addProduct, removeProduct } = useCartContext();
 
   const add = () => {

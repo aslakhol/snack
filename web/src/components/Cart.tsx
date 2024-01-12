@@ -1,38 +1,21 @@
 import { useCartContext } from "../CartProvider";
 import { Button } from "./ui/button";
-import { getVippsLink } from "../utils/vipps";
-import { useRouter } from "next/router";
-import { usePostHog } from "posthog-js/react";
+import { usePayWithVipps } from "../utils/vipps";
 
 export const Cart = () => {
   const { total, amountOfItemsInCart, productsInCart } = useCartContext();
-  const posthog = usePostHog();
-  const router = useRouter();
-  const vippsHref = getVippsLink(productsInCart, total);
+  const { pay } = usePayWithVipps();
 
   if (amountOfItemsInCart <= 0) {
     return null;
   }
 
-  const payWithVipps = () => {
-    posthog.capture(
-      "pay with vipps",
-      {
-        location: "cart",
-        cartValue: total,
-        emptyCart: amountOfItemsInCart <= 0,
-      },
-      { send_instantly: true },
-    );
-
-    setTimeout(() => {
-      void router.push(vippsHref);
-    }, 200);
-  };
-
   return (
     <div className="fixed bottom-0 flex w-full max-w-2xl flex-row items-center justify-between border-t bg-background px-4 py-4">
-      <Button className="bg-[#ff5b24]" onClick={payWithVipps}>
+      <Button
+        className="bg-[#ff5b24]"
+        onClick={() => pay({ productsInCart, total, location: "cart" })}
+      >
         Pay with Vipps
       </Button>
 

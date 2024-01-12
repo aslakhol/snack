@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import { type Product } from "./zod";
+import { usePostHog } from "posthog-js/react";
+import { storeRecentIds } from "./recent";
 
-export const getVippsLink = (products: Product[], total?: number) => {
+const getVippsLink = (products: Product[], total?: number) => {
   const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
 
   const message = getMessage(products);
@@ -20,4 +23,38 @@ const getMessage = (products: Product[]) => {
   }
 
   return `Snack-${products.length}`;
+};
+
+export const usePayWithVipps = () => {
+  const router = useRouter();
+  const posthog = usePostHog();
+
+  const pay = ({
+    productsInCart,
+    total,
+    location,
+  }: {
+    productsInCart: Product[];
+    total?: number;
+    location: string;
+  }) => {
+    storeRecentIds(productsInCart);
+    const vippsHref = getVippsLink(productsInCart, total);
+
+    posthog.capture(
+      "pay with vipps",
+      {
+        location,
+        cartValue: total,
+        emptyCart: productsInCart.length <= 0,
+      },
+      { send_instantly: true },
+    );
+
+    setTimeout(() => {
+      void router.push(vippsHref);
+    }, 200);
+  };
+
+  return { pay };
 };
