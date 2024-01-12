@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { type Product } from "./zod";
 import { usePostHog } from "posthog-js/react";
+import { storeRecent } from "./recent";
 
 const getVippsLink = (products: Product[], total?: number) => {
   const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
@@ -37,6 +38,7 @@ export const usePayWithVipps = () => {
     total?: number;
     location: string;
   }) => {
+    storeRecent(productsInCart);
     const vippsHref = getVippsLink(productsInCart, total);
 
     posthog.capture(
