@@ -47,6 +47,8 @@ export const usePayWithVipps = () => {
         location,
         cartValue: total,
         emptyCart: productsInCart.length <= 0,
+        cartSize: productsInCart.length,
+        itemsInCart: productsInCart.map((product) => product.name),
       },
       { send_instantly: true },
     );
