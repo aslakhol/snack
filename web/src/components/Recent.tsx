@@ -7,8 +7,6 @@ type Props = { products: Product[] };
 export const RecentProducts = ({ products }: Props) => {
   const recentIds = getRecentIds();
 
-  console.log(recentIds);
-
   const recentProducts = products.filter((p) => recentIds.includes(p._id));
 
   return (
