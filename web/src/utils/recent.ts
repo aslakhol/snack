@@ -22,6 +22,10 @@ export const storeRecentIds = (productsInCart: Product[]) => {
 };
 
 export const getRecentIds = () => {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
   const existing = JSON.parse(
     window.localStorage.getItem(PRODUCTS_KEY) ?? "[]",
   ) as string[];
