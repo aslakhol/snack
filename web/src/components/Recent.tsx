@@ -24,3 +24,5 @@ export const RecentProducts = ({ products }: Props) => {
     </div>
   );
 };
+
+export default RecentProducts;

@@ -6,7 +6,11 @@ import { cn } from "../lib/utils";
 import { type Product } from "../utils/zod";
 import { useCartContext } from "../CartProvider";
 import { api } from "../utils/api";
-import { RecentProducts } from "./Recent";
+
+import dynamic from "next/dynamic";
+const RecentProductsComponent = dynamic(() => import("./Recent"), {
+  ssr: false,
+});
 
 type Props = { products: Product[] };
 
@@ -21,7 +25,7 @@ export const Products = ({ products }: Props) => {
 
   return (
     <div className="flex w-full flex-col px-4 py-6">
-      <RecentProducts products={products} />
+      <RecentProductsComponent products={products} />
       {categories.map((c) => {
         if (
           productsByCategory[c.name] === undefined ||
