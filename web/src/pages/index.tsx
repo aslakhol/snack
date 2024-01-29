@@ -4,6 +4,10 @@ import { api } from "@/utils/api";
 import { Snack } from "../components/Snack";
 import CartProvider from "../CartProvider";
 import { SnackSkeleton } from "../components/SnackSkeleton";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import superjson from "superjson";
+import { appRouter } from "../server/api/root";
+import { createInnerTRPCContext } from "../server/api/trpc";
 
 export default function Home() {
   const { data, isLoading, isSuccess } = api.products.getAll.useQuery();
@@ -39,4 +43,21 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: createInnerTRPCContext({}),
+    transformer: superjson,
+  });
+
+  await helpers.products.getAll.prefetch();
+  await helpers.products.getCategories.prefetch();
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
 }
