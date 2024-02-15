@@ -2,7 +2,7 @@ export default {
   name: 'product',
   title: 'Product',
   type: 'document',
-  initialValue: {available: true, category: {_ref: 'b823d00d-52e4-4835-8ea0-603d98e0aece'}},
+  initialValue: {available: true},
   fields: [
     {
       name: 'name',
