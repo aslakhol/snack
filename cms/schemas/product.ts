@@ -21,6 +21,7 @@ export default {
             .toLowerCase()
             .replace(/\b[a-z]{1,2}\b/g, '')
             .replace(/\d+/g, '')
+            .replace(',', '')
             .trim()
             .replace(/\s+/g, '-')
             .slice(0, 20),
