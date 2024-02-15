@@ -50,6 +50,16 @@ export default {
       to: [{type: 'category'}],
     },
   ],
+  orderings: [
+    {
+      title: 'Available, A-Z',
+      name: 'availableName',
+      by: [
+        {field: 'available', direction: 'desc'},
+        {field: 'name', direction: 'asc'},
+      ],
+    },
+  ],
   preview: {
     select: {name: 'name', price: 'price', available: 'available', media: 'image'},
     prepare(selection: {name: string; price: number; available: boolean; media: unknown}) {
