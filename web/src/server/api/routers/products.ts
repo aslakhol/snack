@@ -11,7 +11,7 @@ export const productsRouter = createTRPCRouter({
         metadata
       }
     }
-}`;
+} | order(name asc)`;
 
     const result: unknown = await ctx.sanity.fetch(query);
 
