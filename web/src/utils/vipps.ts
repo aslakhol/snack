@@ -19,10 +19,20 @@ const getMessage = (products: Product[]) => {
   }
 
   if (products.length === 1 && products[0]) {
-    return `Snack-${products[0].slug.current}`;
+    return `${products[0].slug.current}: ${products[0].quantity}}`;
   }
 
-  return `Snack-${products.length}`;
+  const productString = products
+    .map((product) => `${product.name}: ${product.quantity}`)
+    .join(", ");
+
+  if (productString.length > 25) {
+    return `Snack: ${products.length} - ${products.reduce(
+      (acc, product) => acc + product.quantity,
+      0,
+    )}`;
+  }
+  return productString;
 };
 
 export const usePayWithVipps = () => {
