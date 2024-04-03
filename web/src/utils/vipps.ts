@@ -23,7 +23,7 @@ const getMessage = (products: Product[]) => {
   }
 
   const productString = products
-    .map((product) => `${product.name}: ${product.quantity}`)
+    .map((product) => `${product.slug.current}: ${product.quantity}`)
     .join(", ");
 
   if (productString.length > 25) {
