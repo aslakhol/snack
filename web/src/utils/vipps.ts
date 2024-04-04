@@ -19,7 +19,7 @@ const getMessage = (products: Product[]) => {
   }
 
   if (products.length === 1 && products[0]) {
-    return `${products[0].slug.current}: ${products[0].quantity}}`;
+    return `${products[0].slug.current}: ${products[0].quantity}`;
   }
 
   const productString = products
