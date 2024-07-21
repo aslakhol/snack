@@ -49,7 +49,7 @@ export const Snack = () => {
       <Products products={productsToDisplay} />
       <RequestLink />
       <div className={cn(amountOfItemsInCart ? "py-12" : "py-6")} />
-      <Cart />
+      <Cart showWhenEmpty={!!search} />
     </>
   );
 };

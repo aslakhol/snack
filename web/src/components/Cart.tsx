@@ -2,11 +2,11 @@ import { useCartContext } from "../CartProvider";
 import { Button } from "./ui/button";
 import { usePayWithVipps } from "../utils/vipps";
 
-export const Cart = () => {
+export const Cart = ({ showWhenEmpty }: { showWhenEmpty?: boolean }) => {
   const { total, amountOfItemsInCart, productsInCart } = useCartContext();
   const { pay } = usePayWithVipps();
 
-  if (amountOfItemsInCart <= 0) {
+  if (amountOfItemsInCart <= 0 && !showWhenEmpty) {
     return null;
   }
 
@@ -19,7 +19,7 @@ export const Cart = () => {
         Pay with Vipps
       </Button>
 
-      <p className="w-20 text-right text-lg font-semibold">kr {total}</p>
+      {amountOfItemsInCart > 0 && <p className="w-20 text-right text-lg font-semibold">kr {total}</p>}
     </div>
   );
 };
