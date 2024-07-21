@@ -45,7 +45,7 @@ export const Snack = () => {
         setSelectedCategoryId={setSelectedCategoryId}
       />
       <div className="py-16" />
-      <HowToPay total={total} productsInCart={productsInCart} />
+      {!search && <HowToPay total={total} productsInCart={productsInCart} />}
       <Products products={productsToDisplay} />
       <RequestLink />
       <div className={cn(amountOfItemsInCart ? "py-12" : "py-6")} />
