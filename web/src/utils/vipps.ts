@@ -2,13 +2,14 @@ import { useRouter } from "next/router";
 import { type Product } from "./zod";
 import { usePostHog } from "posthog-js/react";
 import { storeRecentIds } from "./recent";
+import { env } from "../env.mjs";
 
 const getVippsLink = (products: Product[], total?: number) => {
   const amountPart = total && total > 0 ? `&a=${total * 100}` : "";
 
   const message = getMessage(products);
 
-  const vippsHref = `https://qr.vipps.no/28/2/01/031/4747304656?v=1&m=${message}${amountPart}`;
+  const vippsHref = `https://qr.vipps.no/28/2/01/031/47${env.NEXT_PUBLIC_VIPPS_NUMBER}?v=1&m=${message}${amountPart}`;
 
   return vippsHref;
 };
