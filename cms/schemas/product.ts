@@ -33,6 +33,17 @@ export default {
       type: 'number',
     },
     {
+      name: 'cost',
+      title: 'Cost',
+      type: 'number',
+      description: 'Cost per unit, excluding pant',
+    },
+    {
+      name: 'pant',
+      title: 'Pant',
+      type: 'number',
+    },
+    {
       name: 'image',
       title: 'Image',
       type: 'image',
