@@ -1,3 +1,5 @@
+import {defineField} from 'sanity'
+
 export default {
   name: 'product',
   title: 'Product',
@@ -32,6 +34,45 @@ export default {
       title: 'Price',
       type: 'number',
     },
+    {
+      name: 'cost',
+      title: 'Cost',
+      type: 'number',
+      description: 'Cost per unit, excluding pant',
+    },
+    {
+      name: 'pant',
+      title: 'Pant',
+      type: 'number',
+    },
+    defineField({
+      name: 'profit',
+      title: 'Profit',
+      type: 'computedString',
+      description: 'Profit per unit = price - cost - pant, % = profit / (cost + pant)',
+      readOnly: true,
+      options: {
+        buttonText: 'Calculate',
+        documentQuerySelection: `
+        "product": *[_type == "product" && _id == ^._id] {
+          cost, pant, price
+      }[0]
+        `,
+        reduceQueryResult: (result: {
+          draft?: {product: {cost: number | null; pant: number | null; price: number | null}}
+          published: {product: {cost: number | null; pant: number | null; price: number | null}}
+        }) => {
+          const cost = result.draft?.product.cost ?? result.published.product.cost ?? 0
+          const pant = result.draft?.product.pant ?? result.published.product.pant ?? 0
+          const price = result.draft?.product.price ?? result.published.product.price ?? 0
+
+          const profit = price - cost - pant
+          const profitPercentage = (profit / (cost + pant)) * 100
+
+          return `${profit.toFixed(2)} per unit - ${profitPercentage.toFixed(2)}%`
+        },
+      },
+    }),
     {
       name: 'image',
       title: 'Image',
