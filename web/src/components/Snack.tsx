@@ -31,7 +31,7 @@ export const Snack = () => {
       return product;
     }
 
-    return selectedCategoryId === product.category._id;
+    return selectedCategoryId === product.category?._id;
   };
 
   const productsToDisplay = filterProducts();

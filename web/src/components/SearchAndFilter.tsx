@@ -26,7 +26,7 @@ export const SearchAndFilter = ({
   const categoriesWithProducts =
     data?.filter(
       (category) =>
-        productsData?.some((product) => product.category._id === category._id),
+        productsData?.some((product) => product.category?._id === category._id),
     ) ?? [];
 
   const toggleCategory = (category: Category) => {

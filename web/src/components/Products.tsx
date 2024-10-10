@@ -45,6 +45,16 @@ export const Products = ({ products }: Props) => {
           </div>
         );
       })}
+      {productsByCategory["No category"] && (
+        <div className="pb-8">
+          <p className="text-sm text-muted-foreground">No category</p>
+          <div className="divide-y">
+            {productsByCategory["No category"]?.map((p) => (
+              <ProductRow key={p._id} product={p} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -116,7 +126,7 @@ export const ProductRow = ({ product }: ProductRowProps) => {
 const groupProductByCategory = (products: Product[]) => {
   const categories = products.reduce(
     (acc, product) => {
-      const category = product.category.name;
+      const category = product.category?.name ?? "No category";
 
       if (!acc[category]) {
         acc[category] = [];
