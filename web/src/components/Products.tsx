@@ -116,7 +116,7 @@ export const ProductRow = ({ product }: ProductRowProps) => {
 const groupProductByCategory = (products: Product[]) => {
   const categories = products.reduce(
     (acc, product) => {
-      const category = product.category.name;
+      const category = product.category?.name ?? "No category";
 
       if (!acc[category]) {
         acc[category] = [];

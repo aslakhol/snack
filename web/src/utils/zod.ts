@@ -13,7 +13,7 @@ export const productSchema = z.object({
   name: z.string(),
   slug: z.object({ current: z.string().optional() }),
   price: z.number(),
-  category: categorySchema,
+  category: categorySchema.nullable(),
   image: z
     .object({
       asset: z.object({
