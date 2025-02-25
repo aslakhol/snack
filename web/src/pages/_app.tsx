@@ -8,18 +8,7 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { useEffect } from "react";
 import { env } from "../env.mjs";
-
-if (typeof window !== "undefined") {
-  posthog.init(env.NEXT_PUBLIC_POSTHOG_API_KEY, {
-    api_host:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/ingest"
-        : "https://snack.aslak.io/ingest",
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === "development") posthog.debug();
-    },
-  });
-}
+import { Router } from "next/router";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -28,6 +17,33 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         .register("/service-worker.js", { scope: "/" })
         .then((registration) => console.log("scope is: ", registration.scope));
     }
+  }, []);
+
+  useEffect(() => {
+    if (env.NEXT_PUBLIC_POSTHOG_API_KEY === "local") {
+      return;
+    }
+
+    posthog.init(env.NEXT_PUBLIC_POSTHOG_API_KEY, {
+      api_host:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000/ingest"
+          : "https://snack.aslak.io/ingest",
+      // Enable debug mode in development
+      loaded: (posthog) => {
+        if (process.env.NODE_ENV === "development") {
+          posthog.debug();
+        }
+      },
+    });
+
+    const handleRouteChange = () => posthog?.capture("$pageview");
+
+    Router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
   }, []);
 
   return (
